@@ -1,0 +1,10 @@
+{% extends 'account/index.html' %}
+{% block content %}
+<form action="/account/entry/" method="post">
+	{%csrf_token%}
+	{{form}}
+    <div>
+	    <input type="submit" name="add">
+    </div>
+</form>
+{%endblock%}

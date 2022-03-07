@@ -1,0 +1,47 @@
+{% extends 'account/index.html' %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>meeting title:</th>
+            <th>{{data.title}}</th>
+        </tr>
+        <tr>
+             <th>meeting id</th>
+            <th>{{data.id}}</th>
+        </tr>
+        <tr>
+            <th>meeting with</th>
+            <th>{{data.meeting_with}}</th>
+        </tr>
+        <tr>
+            <th>meeting date</th>
+            <th>{{data.meeting_date}}</th>
+        </tr>
+</table>
+
+    <p><a class="delete-link" id="delete-object" data-object-id="3">Delete</a></p>
+<div id="result"></div>
+    <script>
+    var elm = document.getElementById('delete-object');
+var objectID = elm.getAttribute('data-object-id');
+var resultDiv = document.getElementById('result');
+elm.addEventListener('click', function() {
+  var ask = confirm('r u sure?');
+  if (ask && objectID) {
+
+    var r = "This meeting detail will be deleted permanently  ";
+    resultDiv.textContent = r;
+    var a = document.createElement('a');
+    var link = document.createTextNode("Click here to finally delete");
+    a.appendChild(link);
+    a.href = '{% url "account:delete_meet" slug=data.slug %}';
+    resultDiv.appendChild(a);
+  } else {
+    resultDiv.textContent = "User cancelled the dialog box...";
+  }
+  return false;
+});
+</script>
+{%endblock%}

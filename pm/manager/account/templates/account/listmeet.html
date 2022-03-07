@@ -1,0 +1,12 @@
+{% extends 'account/index.html' %}
+{% block content %}
+    <p>In this Page you will be able to see all your saved Meetings detail and add more meetings using
+        "add a meeting" button. Click on the meeting to see detail view.</p>
+    <p>--{{message}}--</p>
+<p><h4><a href="/account/meetingsfill/">add a meeting</a></h4><p>
+<ol>
+{%for item in meets%}
+	<li><a href='{% url "account:meet_detail" slug=item.slug %}'>{{item.title}}</a></li>
+{%endfor%}
+    </ol>
+{%endblock%}

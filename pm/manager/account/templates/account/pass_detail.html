@@ -1,0 +1,50 @@
+{% extends 'account/index.html' %}
+{% load static %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Password title:</th>
+            <th>{{entry.title}}</th>
+        </tr>
+        <tr>
+             <th>Password Url</th>
+            <th>{{entry.url}}</th>
+        </tr>
+        <tr>
+            <th>Username</th>
+            <th>{{entry.username}}</th>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <th id="pass">{{pass}}</th>
+        </tr>
+</table>
+<button onclick="func('{{pass}}','{{inc}}')">Click to reveal password</button>
+<script type="text/javascript" src="{% static 'account/js/script.js'%}">
+
+</script>
+<p><a class="delete-link" id="delete-object" data-object-id="3">Delete</a></p>
+<div id="result"></div>
+    <script>
+    var elm = document.getElementById('delete-object');
+var objectID = elm.getAttribute('data-object-id');
+var resultDiv = document.getElementById('result');
+elm.addEventListener('click', function() {
+  var ask = confirm('r u sure?');
+  if (ask && objectID) {
+
+    var r = "Password will be deleted permanently  ";
+    resultDiv.textContent = r;
+    var a = document.createElement('a');
+    var link = document.createTextNode("Click here to finally delete ");
+    a.appendChild(link);
+    a.href = '{% url "account:delete_pass" slug=entry.slug %}';
+    resultDiv.appendChild(a);
+  } else {
+    resultDiv.textContent = "User cancelled the dialog box...";
+  }
+  return false;
+});
+</script>
+{%endblock%}
