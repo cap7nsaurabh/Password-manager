@@ -1,8 +1,0 @@
-{% extends 'account/index.html' %}
-{% block content %}
-<form action="/account/entercard/" method="post">
-	{%csrf_token%}
-	{{form}}
-	<input type="submit" name="add">
-</form>
-{%endblock%}
